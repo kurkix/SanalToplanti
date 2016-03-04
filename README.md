@@ -1,0 +1,2 @@
+# SanalToplanti
+yazılım mühendisliği ödevi
