@@ -5,6 +5,7 @@
  */
 package com.main;
 
+import com.pencere.GirisEkrani;
 import javax.swing.JFrame;
 
 /**
@@ -13,8 +14,7 @@ import javax.swing.JFrame;
  */
 public class SanalToplanti {
     public static void main(String[] args){
-    JFrame pencere = new JFrame();
-    pencere.setSize(100, 100);
-    pencere.setVisible(true);
+        GirisEkrani pencere = new GirisEkrani();
+        pencere.setVisible(true);
     }
 }
