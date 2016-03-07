@@ -6,6 +6,7 @@
 package com.main;
 
 import com.pencere.GirisEkrani;
+import com.pencere.SecenekEkrani;
 import javax.swing.JFrame;
 
 /**
@@ -16,5 +17,6 @@ public class SanalToplanti {
     public static void main(String[] args){
         GirisEkrani pencere = new GirisEkrani();
         pencere.setVisible(true);
+       
     }
 }

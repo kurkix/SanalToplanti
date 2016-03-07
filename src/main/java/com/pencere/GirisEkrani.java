@@ -28,71 +28,83 @@ public class GirisEkrani extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jButton2 = new javax.swing.JButton();
+        SifreGiris = new javax.swing.JPasswordField();
+        GirisButonu = new javax.swing.JButton();
+        KullaniciAdiGiris = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(350, 150));
-        setSize(new java.awt.Dimension(700, 500));
+        setPreferredSize(new java.awt.Dimension(300, 410));
+        setSize(new java.awt.Dimension(300, 410));
 
-        jTextField1.setToolTipText("Kullanıcı Adı");
+        SifreGiris.setToolTipText("Şifre");
 
-        jPasswordField1.setToolTipText("Şifre");
+        GirisButonu.setText("Giriş");
+        GirisButonu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GirisButonuActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Giriş");
+        KullaniciAdiGiris.setToolTipText("Kullanıcı Adı");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPasswordField1)
-                    .addComponent(jTextField1))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(61, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(57, 57, 57))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(KullaniciAdiGiris, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SifreGiris, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(105, 105, 105)
+                        .addComponent(GirisButonu, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(23, 23, 23))
+                .addGap(104, 104, 104)
+                .addComponent(KullaniciAdiGiris, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(SifreGiris, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(GirisButonu)
+                .addContainerGap(170, Short.MAX_VALUE))
         );
 
-        jTextField1.getAccessibleContext().setAccessibleName("KullaniciAdiGiris");
-        jTextField1.getAccessibleContext().setAccessibleParent(jTextField1);
-        jPasswordField1.getAccessibleContext().setAccessibleName("SifreGiris");
-        jButton2.getAccessibleContext().setAccessibleName("GirisButonu");
+        SifreGiris.getAccessibleContext().setAccessibleName("SifreGiris");
+        GirisButonu.getAccessibleContext().setAccessibleName("GirisButonu");
+        KullaniciAdiGiris.getAccessibleContext().setAccessibleName("KullaniciAdiGiris");
+        KullaniciAdiGiris.getAccessibleContext().setAccessibleParent(KullaniciAdiGiris);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(157, 157, 157)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(159, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(102, 102, 102)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(123, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void GirisButonuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GirisButonuActionPerformed
+
+        if(KullaniciAdiGiris.getText().equals("admin")&& SifreGiris.getText().equals("1234")){
+        this.dispose();
+        SecenekEkrani ikinciekran = new SecenekEkrani();
+        ikinciekran.setVisible(true);
+        }
+    }//GEN-LAST:event_GirisButonuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,9 +142,9 @@ public class GirisEkrani extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton GirisButonu;
+    private javax.swing.JTextField KullaniciAdiGiris;
+    private javax.swing.JPasswordField SifreGiris;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
