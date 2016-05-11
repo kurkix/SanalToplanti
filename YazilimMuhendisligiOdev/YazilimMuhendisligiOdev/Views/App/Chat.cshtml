@@ -1,0 +1,81 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <script src="~/SignalR/Hubs"></script>
+    <script>
+        $(function () {
+
+            var chat = $.connection.chatHub;
+            var $username = $('#txtUsername');
+            var $message = $('#txtMessage');
+            var $messages = $('#messages');
+            var resim = document.getElementById("SelectFile");
+            $message.focus();
+
+            chat.client.sendMessage = function (name, message) {
+
+                $messages.append('<li><strong>' + name + '</strong>: ' + message + '</li>');
+            };
+            chat.client.sendFile = function (username, filename) {
+
+                $messages.append('<li><strong>' + username + '</strong>: <a href=/App/Download/?fileName=' + filename + '>' + filename + '</a></li>');
+            };
+
+            $.connection.hub.start().done(function () {
+                $('#btnSendMessage').click(function () {
+
+                    chat.server.send($username.val(), $message.val());
+
+                    $message.val('').focus();
+                });
+
+                $("form#data").submit(function () {
+                    var data = resim.files[0].name.toString();
+                    chat.server.upload($username.val(), data);
+                    var formData = new FormData($(this)[0]);
+
+                    $.ajax({
+                        url: "/App/Kontrol/",
+                        type: 'POST',
+                        data: formData,
+                        async: false,
+                        success: function (data) {
+                            //alert(data)
+                        },
+                        cache: false,
+                        contentType: false,
+                        processData: false
+                    });
+
+                    return false;
+                });
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <div>
+        @ViewBag.path
+        <br /><label for="txtUserName">Kullanıcı Adınız: </label> @Html.TextBox("txtUsername")
+        <br /><br />
+        <label for="txtMessage">Mesajnız:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        @Html.TextBox("txtMessage") <button id="btnSendMessage">Gönder</button>
+        <form id="data" method="post" enctype="multipart/form-data">
+            <input id="SelectFile" type="file" class="multi" name="formData" /><br /> <br /><br />
+            <input id="btnSendFile" type="submit" value="Dosyaları Aktar" />
+        </form>
+    </div>
+    <div id="messages"></div>
+
+</body>
+</html>

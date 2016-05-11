@@ -94,3 +94,9 @@ C:\Users\Burak\Documents\Visual Studio 2015\Projects\YazilimMuhendisligiOdev\Yaz
 C:\Users\Burak\Documents\Visual Studio 2015\Projects\YazilimMuhendisligiOdev\YazilimMuhendisligiOdev\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Burak\Documents\Visual Studio 2015\Projects\YazilimMuhendisligiOdev\YazilimMuhendisligiOdev\obj\Debug\YazilimMuhendisligiOdev.dll
 C:\Users\Burak\Documents\Visual Studio 2015\Projects\YazilimMuhendisligiOdev\YazilimMuhendisligiOdev\obj\Debug\YazilimMuhendisligiOdev.pdb
+C:\Users\Burak\Documents\Visual Studio 2015\Projects\YazilimMuhendisligiOdev\YazilimMuhendisligiOdev\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\Burak\Documents\Visual Studio 2015\Projects\YazilimMuhendisligiOdev\YazilimMuhendisligiOdev\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\Users\Burak\Documents\Visual Studio 2015\Projects\YazilimMuhendisligiOdev\YazilimMuhendisligiOdev\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\Users\Burak\Documents\Visual Studio 2015\Projects\YazilimMuhendisligiOdev\YazilimMuhendisligiOdev\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+C:\Users\Burak\Documents\Visual Studio 2015\Projects\YazilimMuhendisligiOdev\YazilimMuhendisligiOdev\bin\Microsoft.AspNet.SignalR.Client.dll
+C:\Users\Burak\Documents\Visual Studio 2015\Projects\YazilimMuhendisligiOdev\YazilimMuhendisligiOdev\bin\Microsoft.AspNet.SignalR.Client.xml

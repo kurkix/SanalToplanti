@@ -12,7 +12,8 @@ namespace YazilimMuhendisligiOdev
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureAuth(app);
+           // ConfigureAuth(app);
+            app.MapSignalR();
         }
         private static IXSocketServerContainer _container;
         public static void Start()
