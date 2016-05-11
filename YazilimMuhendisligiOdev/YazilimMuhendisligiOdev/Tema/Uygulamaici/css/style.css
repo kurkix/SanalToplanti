@@ -10,28 +10,33 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
  #localVideo {
-            position: absolute;
-            bottom: 0;
-            margin-left:55%;
-            margin-bottom:3%;
-            }
- #localVideo video {
-                max-width: 320px;
-                }
- #remoteVideos {
-     position:absolute;
-     margin-top:5%;
-            border: 1px solid #dadada;
-            padding: 10px;
-            left:10%
             
             }
- #remoteVideos video {
-                max-width: 320px;
-                }
+#localVideo video {
+    max-width: 320px;
+    }
+#remoteVideos {
+     margin-top:5%;
+
+     left:10%;
+     max-height:30%;
+     }
+#remoteVideos video {
+    border: 1px solid #dadada;
+    padding: 10px;
+    max-width: 320px;
+    }
 
  .mesaj{
-     margin-top:35%;
+     margin-top:18%;
+
+ }
+ .remotetaraf{
+     
+ }
+ .yerel{
+     margin-top:5%;
+
  }
 
 a,

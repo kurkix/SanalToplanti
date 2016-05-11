@@ -1,0 +1,168 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="~/Tema/Uygulamaici/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome CSS -->
+    <link href="~/Tema/Uygulamaici/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="~/Tema/Uygulamaici/css/animate.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="~/Tema/Uygulamaici/css/style.css" rel="stylesheet">
+
+    <!-- Template js -->
+    <script src="~/Tema/Uygulamaici/js/jquery-2.1.1.min.js"></script>
+    <script src="~/Tema/Uygulamaici/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Tema/Uygulamaici/js/jquery.appear.js"></script>
+    <script src="~/Tema/Uygulamaici/js/contact_me.js"></script>
+    <script src="~/Tema/Uygulamaici/js/jqBootstrapValidation.js"></script>
+    <script src="~/Tema/Uygulamaici/js/modernizr.custom.js"></script>
+    <script src="~/Tema/Uygulamaici/js/script.js"></script>
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+    <link href="~/Tema/Uygulamaici/css/style.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+                <div class="col-md-4"></div>
+                <div id="remoteVideos"></div>
+            </div>
+
+            <div class="row">
+                    <div id="localVideo">
+                        <video autoplay muted></video>
+                    </div>
+
+            </div>
+        <div class="mesaj">
+
+            <input type="text" value="Hello World" id="message" /><button id="send">send</button>
+            <hr />
+            <div data-bind="foreach:messages">
+                <div data-bind="text:message"></div>
+            </div>
+
+            <script src="~/Scripts/XSockets.latest.min.js" type="text/javascript"></script>
+            <script src="~/Scripts/knockout-3.4.0.js"></script>
+            <script type="text/javascript">
+        //VM
+        var vm = { messages: ko.observableArray([]) };
+        ko.applyBindings(vm);
+
+        //Connect to the built in "Generic" controller
+        var conn = new XSockets.WebSocket('ws://localhost:4502',['generic']);
+        var controller = conn.controller('generic');
+
+        //Method that will be invoked when a message with topic "simple" is sent
+        controller.simple = function(d) {
+            vm.messages.unshift(d);
+        };
+
+        ////Classic simple messaging using "onmessage", will get object, topic and controller as parameters
+        //controller.onmessage = function(o,t,c) {
+        //    if(t == 'simple')
+        //        vm.messages.unshift(o);
+        //};
+
+        //When button is clicked, send a message
+        document.querySelector("#send").onclick = function() {
+            var m = document.querySelector('#message').value;
+            controller.invoke('simple', { message: m });
+        };
+            </script>
+
+        </div>
+    </div>
+
+
+
+
+     <!--Get the nessassary JavaScript libraries--> 
+    <script src="//rawgit.com/XSockets/XSockets.Clients/master/src/XSockets.Clients/XSockets.JavaScript/XSockets.latest.js"></script>
+        <script src="//rawgit.com/XSockets/XSockets.WebRTC/master/src/js/XSockets.WebRTC.latest.js"></script>
+         XVA - WebRTC Basic
+    <!-- XVA - WebRTC Basic -->
+    <script>
+        function $(selector, el) {
+            if (!el) {
+                el = document;
+            }
+            return el.querySelector(selector);
+        }
+        var brokerController, context, ws, webRTC;
+        document.addEventListener("DOMContentLoaded", function () {
+            // connect to the server using a predefined context (a.k.a room )
+            // we pass a 'static' guid as a parameters , see ctx below
+            context = '1c743b9b-f19f-4b74-a472-4081dbc14f43';
+            ws = new XSockets.WebSocket("ws://127.0.0.1:4502", ["connectionbroker"], {
+                ctx: context
+            });
+            ws.onconnected = function () {
+                console.log("connected to to broker");
+                brokerController = ws.controller("connectionbroker"); // get the 'connectionBroker'
+                // create an WebRTC instance using the connectionBroker
+                webRTC = new XSockets.WebRTC(brokerController);
+                // okey, we are connected, prompt and get a mediaSteam (video, qvga )
+                var gumConstraints = webRTC.userMediaConstraints.qvga(false); // to get sound, pass true
+                webRTC.getUserMedia(gumConstraints, function (peer) {
+                    console.log("Got a media stream, onlocalvideo will fire..");
+                }, function (ex) {
+                    console.error("failed to getUserMedia", ex);
+                });
+                // localMediaStream
+                webRTC.onlocalstream = function (stream) {
+                    window.attachMediaStream($("#localVideo video"), stream);
+                    // when i got a local mediastream , connect to others.
+                    webRTC.connectToContext();
+                };
+                // remoteMediaStream will fire for each of the remote peerConnections
+                var sayi=0;
+                webRTC.onremotestream = function (remote) {
+                    sayi++;
+
+                    //for (var i = 1; i < sayi;) {
+
+                    //    var degistirdiv = document.getElementById("#a" + i);
+                    //    degistirdiv.setAttribute("class", "col-md-" + 12 / sayi);
+                    //    $("#a" + i).appendChild(degistirdiv);
+                    //}
+                    var yenidiv = document.createElement("div");
+                    yenidiv.setAttribute("class","col-md-4")
+                    yenidiv.setAttribute("id", "a" + sayi);
+                    $("#remoteVideos").appendChild(yenidiv);
+
+                    var removteVideo = document.createElement("video");
+                    removteVideo.setAttribute("autoplay", "true");
+                    removteVideo.setAttribute("data-streamid", remote.stream.id);
+                    $("#a"+sayi).appendChild(removteVideo);
+                    window.attachMediaStream(removteVideo, remote.stream);
+                };
+                // onremovestream will fire when a remote peer is no longer available
+                webRTC.onremotestreamlost = function (evt) {
+                    $("#remoteVideos").removeChild($("video[data-streamid='" + evt.stream.id + "']"));
+                };
+                webRTC.oncontextcreated = function (ctx) {
+                    console.log("Connected to the broker on the following context", ctx.Context);
+                };
+            };
+        });
+    </script>
+
+</body>
+</html>
