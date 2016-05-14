@@ -1,0 +1,24 @@
+﻿
+body {
+    background: url("../Uygulamaici/images/background.png") no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+
+.butonlar{
+    margin-top:25%;
+}
+.oda_ac{
+    float:right;
+}
+
+.odaya_katil{
+    float:left;
+}
+
+.odaya_katilma{
+    margin-top:20%;
+}
+
+

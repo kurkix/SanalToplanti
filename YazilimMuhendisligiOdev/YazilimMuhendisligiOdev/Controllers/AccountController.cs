@@ -128,7 +128,7 @@ namespace YazilimMuhendisligiOdev.Controllers
             return View(model);
         }
 
-       
+        ApplicationDbContext db = new ApplicationDbContext();
         //
         // POST: /Account/LogOff
         [HttpPost]
@@ -136,6 +136,16 @@ namespace YazilimMuhendisligiOdev.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            foreach(var item in db.KullaniciTablosu.ToList())
+            {
+                if (item.KullaniciAdi == User.Identity.GetUserName())
+                {
+                    Kullanici kullanici = db.KullaniciTablosu.Find(item.KullaniciID);
+                    db.KullaniciTablosu.Remove(kullanici);
+                    db.SaveChanges();
+                }
+            }
+
             return RedirectToAction("Index", "Home");
         }
 

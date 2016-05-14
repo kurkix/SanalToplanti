@@ -42,5 +42,17 @@ namespace YazilimMuhendisligiOdev.Models
         public string ConfirmPassword { get; set; }
     }
 
-   
+    public class OdaAcViewModel
+    {
+        public string isim { get; set; }
+
+    }
+
+    public class OdayaGirViewModel
+    {
+        public string isim { get; set; }
+
+    }
+
+
 }

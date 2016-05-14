@@ -1,0 +1,36 @@
+﻿@model YazilimMuhendisligiOdev.Models.OdaAcViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Oda Aç</title>
+    <link href="~/Tema/Uygulama/stil.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 odaya_katilma">
+            <div class="row">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <div class="col-md-8">@Html.TextBoxFor(m=>m.isim, new { @class="form-control" }) </div>
+                    <div class="col-md-3"><button type="submit" class="btn btn-primary">Oluştur</button></div>
+                </div>
+                }
+            </div>
+
+        </div>
+        <div class="col-md-4"></div>
+
+    </div>
+</body>
+</html>

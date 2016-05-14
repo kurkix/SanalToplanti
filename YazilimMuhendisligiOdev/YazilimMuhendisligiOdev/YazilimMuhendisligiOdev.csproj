@@ -280,7 +280,9 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Kullanici.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Oda.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RealtimeControllers\ConnectionBroker.cs" />
     <Compile Include="RealtimeControllers\Constants\Events.cs" />
@@ -305,12 +307,27 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\adapter.js" />
+    <Content Include="Scripts\alertify.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Scripts\jquery-1.7.1.intellisense.js" />
+    <Content Include="Scripts\jquery-1.7.1.js" />
+    <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\jquery.signalR-1.0.0-rc2.js" />
+    <Content Include="Scripts\jquery.signalR-1.0.0-rc2.min.js" />
     <Content Include="Scripts\jquery.signalR-2.2.0.js" />
     <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\knockout-2.2.1.debug.js" />
+    <Content Include="Scripts\knockout-2.2.1.js" />
     <Content Include="Scripts\knockout-3.4.0.debug.js" />
     <Content Include="Scripts\knockout-3.4.0.js" />
+    <Content Include="Scripts\knockout.mapping-latest.js" />
+    <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\XSockets.latest.js" />
     <Content Include="Scripts\XSockets.latest.min.js" />
     <Content Include="Tema\Ana\bootstrap\css\bootstrap-theme.css" />
@@ -372,10 +389,15 @@
     <Content Include="Tema\Uygulamaici\images\about-02.jpg" />
     <Content Include="Tema\Uygulamaici\images\about-03.jpg" />
     <Content Include="Tema\Uygulamaici\images\background.jpg" />
+    <Content Include="Tema\Uygulamaici\images\background.png" />
     <Content Include="Tema\Uygulamaici\images\blog-01.jpg" />
     <Content Include="Tema\Uygulamaici\images\blog-02.jpg" />
     <Content Include="Tema\Uygulamaici\images\blog-03.jpg" />
     <Content Include="Tema\Uygulamaici\images\blog-04.jpg" />
+    <Content Include="Tema\Uygulamaici\images\odaya_ac_1.png" />
+    <Content Include="Tema\Uygulamaici\images\odaya_ac_2.png" />
+    <Content Include="Tema\Uygulamaici\images\odaya_katil_1.png" />
+    <Content Include="Tema\Uygulamaici\images\odaya_katil_2.png" />
     <Content Include="Tema\Uygulamaici\images\portfolio\1.png" />
     <Content Include="Tema\Uygulamaici\images\portfolio\10.png" />
     <Content Include="Tema\Uygulamaici\images\portfolio\11.png" />
@@ -402,7 +424,13 @@
     <Content Include="Tema\Uygulamaici\js\jquery.appear.js" />
     <Content Include="Tema\Uygulamaici\js\modernizr.custom.js" />
     <Content Include="Tema\Uygulamaici\js\script.js" />
+    <Content Include="Tema\Uygulama\images\arka2.jpg" />
+    <Content Include="Tema\Uygulama\images\ARKA4.jpg" />
+    <Content Include="Tema\Uygulama\images\ARKA5.jpg" />
+    <Content Include="Tema\Uygulama\images\arkaplan.jpg" />
     <Content Include="Tema\Uygulama\images\bg.png" />
+    <Content Include="Tema\Uygulama\images\RK3.jpg" />
+    <Content Include="Tema\Uygulama\stil.css" />
     <Content Include="Tema\Uygulama\style.css" />
     <Content Include="XSocketsNET\ServerExample\ReadMe.txt" />
     <Content Include="RealtimeControllers\readme.md" />
@@ -419,7 +447,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -427,7 +457,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
@@ -477,6 +507,12 @@
     <Content Include="Tema\Uygulamaici\fonts\fontawesome-webfont.woff" />
     <Content Include="Tema\Uygulamaici\fonts\FontAwesome.otf" />
     <Content Include="Tema\Uygulamaici\mail\contact_me.php" />
+    <Content Include="Views\App\Room.cshtml" />
+    <Content Include="Views\App\Create.cshtml" />
+    <Content Include="Views\App\Fail.cshtml" />
+    <Content Include="Views\App\Enter.cshtml" />
+    <Content Include="Views\App\deneme.cshtml" />
+    <Content Include="Views\App\OdaKapandi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,32 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>OdaKapandi</title>
+    <link href="~/Tema/Uygulamaici/css/style.css" rel="stylesheet">
+
+    <link href="~/Tema/Uygulamaici/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <div class="container ortayer">
+        <h2 class="text-center">Oda yöneticisi odayı kapattı.</h2> <br />
+        <div class="col-md-4"></div>
+        <div class="col-md-4"><button class="btn btn-primary ortabuton" type="button" onclick="AnaSayfayaDon()">Anasayfaya Dön</button></div>
+        <div class="col-md-4"></div>
+    </div>
+
+    <script type="text/javascript">
+        function AnaSayfayaDon() {
+            window.location = '@Url.Action("Index","Home")';
+        }
+
+    </script>
+</body>
+</html>

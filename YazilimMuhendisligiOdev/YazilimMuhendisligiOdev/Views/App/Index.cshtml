@@ -38,36 +38,79 @@
 </head>
 <body>
 
-    <div class="container">
-        <div class="row remotetaraf"><div id="remoteVideos"></div></div>
-        <br />
-        <div class="row yerel">
-            <div class="col-md-6 mesaj">
-                <div data-bind="foreach:messages">
-                    <div data-bind="text:message"></div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" id="message" />
+    <div class="KendiContainerim">
+        <div class="col-md-10">
+            <div class="row remotetaraf"><div id="remoteVideos"></div></div>
+            <br />
+            <div class="row yerel">
+                <div class="col-md-6">
+                    <select size="10" class="mesaj" data-bind="foreach:messages">
+                        <option data-bind="text:message">
+                            
+                        </option>
+                    </select>
+                    @*<select name="sometext" size="5"></select>*@
+                    <div class="form-group">
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" id="message" />
+                        </div>
+                        <div class="col-md-2">
+                            @*<input id="SelectFile" type="file" class="multi" name="formData" />
+                            <input id="btnSendFile" type="submit" value="Dosyaları Aktar" />*@
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-success" id="send">Gönder</button>
+                        </div>
+
+
                     </div>
-                    <div class="col-md-2">
-                        <button class="btn btn-success" id="send">Gönder</button>
-                    </div>
-                    
 
                 </div>
-
-            </div>
-            <div class="col-md-2"></div>
-            <div class="col-md-4">
-                <div id="localVideo">
-                    <video autoplay muted></video>
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    <div id="localVideo">
+                        <video autoplay muted></video>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="col-md-2 ayarlar">
+            <div class="panel panel-default ayarlar">
+                <div class="panel-heading">Kullanıcılar</div>
+                <div class="panel-body">
+                    <div class="container">
+                        <div class="row" id="kullanci">
+                            @foreach (var item in ViewBag.kullanicilar)
+                            {
+                                if (item.OdaId == ViewBag.odaid)
+                                {
+                                    <span class="glyphicon glyphicon-user"></span> @item.KullaniciAdi
+                                }
+                            }
+                            <div data-bind="foreach:kullanicilar" id="kullaniciid">
+                                <div data-bind="html:kullanici">
+
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="row">
+                            @if (ViewBag.kullanicirol == "Admin")
+                            {
+                                <button type="button" onclick="OdayiKapaTiklama()" class="btn btn-danger">Odayı Kapat</button>
+                            }
+                            else
+                            {
+                                <button type="button" onclick="OdadanCikma()" class="btn btn-danger">Odadan Çık</button>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
-
-
 
     <script src="~/Scripts/XSockets.latest.min.js" type="text/javascript"></script>
     <script src="~/Scripts/knockout-3.4.0.js"></script>
@@ -75,18 +118,44 @@
     <script src="//rawgit.com/XSockets/XSockets.WebRTC/master/src/js/XSockets.WebRTC.latest.js"></script>
 
     <script type="text/javascript">
+
         //VM
-        var vm = { messages: ko.observableArray([]) };
+        var ViewModel = function () {
+            this.messages= ko.observableArray([]);
+            this.kullanicilar= ko.observableArray([]);
+        }
+        var vm=new ViewModel();
+        //var vm = { messages: ko.observableArray([]) };
         ko.applyBindings(vm);
 
         //Connect to the built in "Generic" controller
-        var conn = new XSockets.WebSocket('ws://localhost:4502',['generic']);
+        var conn = new XSockets.WebSocket('ws://localhost:4502', ['generic']);
         var controller = conn.controller('generic');
 
         //Method that will be invoked when a message with topic "simple" is sent
         controller.simple = function(d) {
             vm.messages.unshift(d);
         };
+        controller.simple2 = function (d) {
+            vm.kullanicilar.unshift(d);
+        };
+
+        controller.odakapa = function () {
+            window.location = "@Url.Action("OdayiKapat","App",new { odaid=ViewBag.odaid })";
+        };
+        controller.OdadanCik = function () {
+            $("#kullaniciid").removeChild("span[id='" + @ViewBag.kullaniciadi + "']");
+
+        };
+        function OdayiKapaTiklama() {
+            
+            controller.invoke('odakapa');
+        };
+        function OdadanCikma() {
+            controller.invoke('OdadanCik');
+        };
+
+        controller.invoke('simple2', { kullanici: "<span class=\"glyphicon glyphicon-user\" id=\"@ViewBag.kullaniciadi\"></span>" + " @ViewBag.kullaniciadi" });
 
         ////Classic simple messaging using "onmessage", will get object, topic and controller as parameters
         //controller.onmessage = function(o,t,c) {
@@ -95,12 +164,13 @@
         //};
 
         //When button is clicked, send a message
+
         document.querySelector("#send").onclick = function() {
             var m = document.querySelector('#message').value;
-            controller.invoke('simple', { message: m });
+            controller.invoke('simple', { message: "@ViewBag.kullaniciadi " + " :" + m });
         };
     </script>
-
+     
     <!-- XVA - WebRTC Basic -->
     <script>
         function $(selector, el) {
@@ -113,11 +183,12 @@
         document.addEventListener("DOMContentLoaded", function () {
             // connect to the server using a predefined context (a.k.a room )
             // we pass a 'static' guid as a parameters , see ctx below
-            context = '1c743b9b-f19f-4b74-a472-4081dbc14f43';
+            context = '@ViewBag.odaid';
             ws = new XSockets.WebSocket("ws://127.0.0.1:4502", ["connectionbroker"], {
                 ctx: context
             });
             ws.onconnected = function () {
+
                 console.log("connected to to broker");
                 brokerController = ws.controller("connectionbroker"); // get the 'connectionBroker'
                 // create an WebRTC instance using the connectionBroker
@@ -139,13 +210,6 @@
                 var sayi=0;
                 webRTC.onremotestream = function (remote) {
                     sayi++;
-
-                    //for (var i = 1; i < sayi;) {
-
-                    //    var degistirdiv = document.getElementById("#a" + i);
-                    //    degistirdiv.setAttribute("class", "col-md-" + 12 / sayi);
-                    //    $("#a" + i).appendChild(degistirdiv);
-                    //}
                     var yenidiv = document.createElement("div");
                     yenidiv.setAttribute("class","col-md-4")
                     yenidiv.setAttribute("id", "a" + sayi);
@@ -164,6 +228,8 @@
                 webRTC.oncontextcreated = function (ctx) {
                     console.log("Connected to the broker on the following context", ctx.Context);
                 };
+
+
             };
         });
     </script>
